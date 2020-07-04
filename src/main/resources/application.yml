@@ -11,5 +11,8 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
     username: root
-    password: root
+    password: ROOT
     url: jdbc:mysql://localhost:3306/db_ckeditor_springboot?useUnicode=true&useSSL=false&characterEncoding=utf8
+    druid:
+      stat-view-servlet:
+        enabled: true
