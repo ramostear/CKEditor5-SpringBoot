@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 
 /**
  * @author :       ramostear/树下魅狐
@@ -30,5 +32,22 @@ public class MvcConfiguration extends WebMvcConfigurationSupport {
                 .addResourceLocations("classpath:/static/")
                 .addResourceLocations("file:"+ Consts.FILE_STORAGE_ROOT+"/images/");
         super.addResourceHandlers(registry);
+    }
+
+    @Bean
+    public FreeMarkerViewResolver freeMarkerViewResolver(){
+        FreeMarkerViewResolver resolver = new FreeMarkerViewResolver();
+        resolver.setCache(false);
+        resolver.setPrefix("");
+        resolver.setSuffix(".html");
+        return resolver;
+    }
+
+    @Bean
+    public FreeMarkerConfigurer freeMarkerConfigurer(){
+        String[] templatePaths = {"classpath:/templates/","file:"+Consts.FILE_STORAGE_ROOT+"/themes/"};
+        FreeMarkerConfigurer configurer = new FreeMarkerConfigurer();
+        configurer.setTemplateLoaderPaths(templatePaths);
+        return configurer;
     }
 }
